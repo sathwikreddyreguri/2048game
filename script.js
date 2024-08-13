@@ -180,6 +180,75 @@ document.addEventListener('DOMContentLoaded', () =>  {
       moveDown()
       generate()
     }
+
+    ////////////////////////////////////////////////////
+
+    let touchstartX = 0;
+    let touchendX = 0;
+    let touchstartY = 0;
+    let touchendY = 0;
+
+const threshold = 50; // Minimum distance for a swipe
+
+function handleGesture() {
+  if (touchendX < touchstartX - threshold) {
+    // Swipe left
+    console.log('Swiped left');
+    // Add your code to handle swipe left
+    function keyLeft() {
+        moveLeft()
+        combineRow()
+        moveLeft()
+        generate()
+      }
+  }
+
+  if (touchendX > touchstartX + threshold) {
+    // Swipe right
+    console.log('Swiped right');
+    // Add your code to handle swipe right
+    function keyRight() {
+        moveRight()
+        combineRow()
+        moveRight()
+        generate()
+      }
+  }
+
+  if (touchendY < touchstartY - threshold) {
+    console.log('Swiped up');
+    // Add your code to handle swipe up
+    function keyUp() {
+        moveUp()
+        combineColumn()
+        moveUp()
+        generate()
+      }
+    
+  }
+
+  if (touchendY > touchstartY + threshold) {
+    console.log('Swiped down');
+    // Add your code to handle swipe down
+    function keyDown() {
+        moveDown()
+        combineColumn()
+        moveDown()
+        generate()
+      }
+  }
+}
+
+document.addEventListener('touchstart', (e) => {
+  touchstartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener('touchend', (e) => {
+  touchendX = e.changedTouches[0].screenX;
+  handleGesture();
+});
+
+    /////////////////////////////////////
   
     //check for the number 2048 in the squares to win
     function checkForWin() {
